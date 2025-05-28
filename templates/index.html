@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NBA Game Prediction</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1 { color: #333; }
+        form { margin-bottom: 20px; }
+        label { margin-right: 10px; }
+        select, input[type="date"] { margin-right: 20px; padding: 5px; }
+        button { padding: 5px 15px; }
+        p { color: #0066cc; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>NBA Game Prediction</h1>
+    <form method="POST" action="/predict">
+        <label for="home_team">Home Team:</label>
+        <select name="home_team" id="home_team">
+            {% for team in team_names %}
+            <option value="{{ team }}">{{ team }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="away_team">Away Team:</label>
+        <select name="away_team" id="away_team">
+            {% for team in team_names %}
+            <option value="{{ team }}">{{ team }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="date">Game Date:</label>
+        <input type="date" name="date" id="date" required>
+
+        <button type="submit">Predict Winner</button>
+    </form>
+
+    {% if prediction %}
+    <p>{{ prediction }}</p>
+    {% endif %}
+</body>
+</html>
