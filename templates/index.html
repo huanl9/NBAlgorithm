@@ -25,7 +25,10 @@
     <div id="result"></div>
     <script>
 document.addEventListener('DOMContentLoaded', function() {
-    fetch('https://nbalgorithmbackend.onrender.com/teams')
+    const backendUrl = 'https://nbalgorithmbackend.onrender.com';
+    
+    // Fetch team names from backend
+    fetch(`${backendUrl}/teams`)
         .then(response => response.json())
         .then(teams => {
             const homeSelect = document.getElementById('homeTeam');
@@ -40,11 +43,12 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .catch(error => console.error('Error fetching teams:', error));
 
+    // Handle prediction button click
     document.getElementById('predictButton').addEventListener('click', function() {
         const homeTeam = document.getElementById('homeTeam').value;
         const awayTeam = document.getElementById('awayTeam').value;
         const date = document.getElementById('date').value;
-        fetch('https://nbalgorithmbackend.onrender.com/predict', {
+        fetch(`${backendUrl}/predict`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({home_team: homeTeam, away_team: awayTeam, date: date})
